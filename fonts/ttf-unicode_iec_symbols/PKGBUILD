@@ -1,0 +1,21 @@
+# Maintainer: jls <jlssparreboom@gmail.com>
+# Contributor: benjsperry
+
+pkgname=ttf-unicode_iec_symbol
+_pkgname=unicode_iec_symbol
+pkgver=1.0
+pkgrel=1
+pkgdesc="The IEC Power Symbols"
+arch=('any')
+url="http://unicodepowersymbol.com/"
+license=('MIT')
+depends=('fontconfig' 'xorg-font-utils')
+install=unicode_iec_symbol.install
+source=($_pkgname.ttf::http://unicodepowersymbol.com/wp-content/uploads/2015/05/Unicode_IEC_symbol.ttf)
+sha256sums=('f193044a10a3b49f485b29c608c8f69db5aa2e60f8f0cbc4455ea07203325432')
+
+package()
+{
+  install -d $pkgdir/usr/share/fonts/TTF/
+  install -m66 $srcdir/$_pkgname.ttf $pkgdir/usr/share/fonts/TTF/
+}
