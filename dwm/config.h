@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "Dejavu Sans Mono:medium:size=10.5";
+static const char font[]            = "Dejavu Sans Mono:medium:size=10";
 #define NUMCOLORS 9
 static const char colors[NUMCOLORS][ColLast][9] = {
 // border foreground background
@@ -84,7 +84,7 @@ static Key keys[] = {
 	{ ControlMask|Mod1Mask,         XK_r,      spawn,          {.v = rebootcmd } },
 	{ ControlMask|Mod1Mask,         XK_q,      spawn,          {.v = shutcmd } },
 	{ ControlMask|Mod1Mask,         XK_s,      spawn,          SHCMD("$HOME/scripts/shux") },
-	{ ControlMask|Mod1Mask,         XK_w,      spawn,          SHCMD("$(tabbed -c -d -p -2 >/tmp/tabbed.xid); vimprobable2 -e $(</tmp/tabbed.xid)") },
+	{ ControlMask|Mod1Mask,         XK_w,      spawn,          SHCMD("$(tabbed -c -d -p -2 >/tmp/tabbed.xid); vimb -e $(</tmp/tabbed.xid)") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

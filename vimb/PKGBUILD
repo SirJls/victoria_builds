@@ -1,5 +1,4 @@
 # Maintainer: jason ryan <jasonwryan@gmail.com>
-
 pkgname=vimb-git
 _pkgname=vimb
 pkgver=2.11.r0.ge3ea1d3
