@@ -67,7 +67,7 @@ index 8fd5d4a..db49aec 100644
 +static const char   *termcmd[] = { "urxvtc", NULL };
 +static const char  *xtermcmd[] = { "xterm",  NULL };
 +static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
-+static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", "-f", "/home/jason/.tmux/conf", NULL };
++static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", "-f", "/home/jls/.tmux/conf", NULL };
 +static const char    *padcmd[] = { "urxvtc", "-title", "scratchpad", "-geometry", "56x10-30+40", NULL };
 +static const char   *lockcmd[] = { "xautolock", "-locknow", NULL };
 +static const char *rebootcmd[] = { "systemctl", "reboot", NULL };
@@ -85,7 +85,7 @@ index 8fd5d4a..db49aec 100644
 +	{ ControlMask|Mod1Mask,         XK_p,      spawn,          {.v = padcmd } },
 +	{ ControlMask|Mod1Mask,         XK_r,      spawn,          {.v = rebootcmd } },
 +	{ ControlMask|Mod1Mask,         XK_q,      spawn,          {.v = shutcmd } },
-+	{ ControlMask|Mod1Mask,         XK_s,      spawn,          SHCMD("$HOME/Scripts/shux") },
++	{ ControlMask|Mod1Mask,         XK_s,      spawn,          SHCMD("$HOME/scripts/screenie") },
 +	{ ControlMask|Mod1Mask,         XK_w,      spawn,          SHCMD("$(tabbed -c -d -p -2 >/tmp/tabbed.xid); vimprobable2 -e $(</tmp/tabbed.xid)") },
  	{ MODKEY,                       XK_b,      togglebar,      {0} },
  	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },

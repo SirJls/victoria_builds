@@ -1,0 +1,12 @@
+diff -aur i3lock-fancy.pristine/lock i3lock-fancy.new/lock
+--- i3lock-fancy.pristine/lock	2016-01-03 16:19:04.655515660 -0500
++++ i3lock-fancy.new/lock	2016-01-03 16:19:36.360930253 -0500
+@@ -8,7 +8,7 @@
+ # get path where the script is located
+ # its used for the lock icon
+ pushd `dirname $0` > /dev/null
+-SCRIPTPATH=`pwd`
++SCRIPTPATH=/usr/share/i3lock-fancy-git
+ popd > /dev/null
+  
+ # l10n support

@@ -7,7 +7,7 @@ index a74ce73..8f27194 100644
  #define SETTING_GUI_FONT_NORMAL     "monospace normal 10"
  #define SETTING_GUI_FONT_EMPH       "monospace bold 10"
 -#define SETTING_HOME_PAGE           "http://fanglingsu.github.io/vimb/"
-+#define SETTING_HOME_PAGE           "https://bbs.archlinux.org/"
++#define SETTING_HOME_PAGE           "http://jasonwryan.com/"
  
  #define MAXIMUM_HINTS              500
  
