@@ -1,5 +1,4 @@
 # Patched for xft and file completion support
-
 pkgname=dmenu
 pkgver=4.5.13.5ed5e90
 pkgrel=1

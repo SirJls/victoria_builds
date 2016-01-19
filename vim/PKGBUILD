@@ -34,6 +34,7 @@ prepare() {
 build() {
     cd "${srcdir}"/vim-runtime-build
 
+    # --with-python-config-dir=/usr/lib/python2.7/config \
     ./configure \
         --prefix=/usr \
         --localstatedir=/var/lib/vim \
@@ -42,8 +43,7 @@ build() {
         --with-x=yes \
         --enable-multibyte \
         --enable-rubyinterp \
-        --enable-pythoninterp \
-        --with-python-config-dir=/usr/lib/python2.7/config \
+        --enable-python2interp \
         --enable-luainterp \
         --enable-perlinterp \
         --enable-cscope \
@@ -55,6 +55,7 @@ build() {
 
     cd "${srcdir}"/vim-build
 
+    # --with-python-config-dir=/usr/lib/python2.7/config \
     ./configure \
         --prefix=/usr \
         --localstatedir=/var/lib/vim \
@@ -63,8 +64,7 @@ build() {
         --with-x=yes \
         --enable-multibyte \
         --enable-rubyinterp \
-        --enable-pythoninterp \
-        --with-python-config-dir=/usr/lib/python2.7/config \
+        --enable-python2interp \
         --enable-luainterp \
         --enable-perlinterp \
         --enable-cscope \
