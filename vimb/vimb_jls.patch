@@ -1,8 +1,8 @@
-diff --git a/src/config.def.h b/src/config.def.h
-index a74ce73..8f27194 100644
---- a/src/config.def.h
-+++ b/src/config.def.h
-@@ -70,7 +70,7 @@
+diff --git a/config.def.h b/config.def.h
+index c790f7f..d2d625e 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -72,7 +72,7 @@
  #define SETTING_DEFAULT_FONT_SIZE   10
  #define SETTING_GUI_FONT_NORMAL     "monospace normal 10"
  #define SETTING_GUI_FONT_EMPH       "monospace bold 10"
@@ -11,7 +11,7 @@ index a74ce73..8f27194 100644
  
  #define MAXIMUM_HINTS              500
  
-@@ -79,7 +79,7 @@
+@@ -81,7 +81,7 @@
  
  #ifdef FEATURE_WGET_PROGRESS_BAR
  /* chars to use for the progressbar */
@@ -20,11 +20,11 @@ index a74ce73..8f27194 100644
  #define PROGRESS_BAR_LEN            20
  #endif
  
-@@ -99,7 +99,6 @@ opacity:0.7\
+@@ -104,7 +104,6 @@ opacity:0.7\
  }\
  ._hintElem{\
  background-color:#ff0 !important;\
--color:#000 !important\
+-color:#000 !important;\
+ transition:all 0 !important;\
+ transition-delay:all 0 !important\
  }\
- ._hintElem._hintFocus{\
- background-color:#8f0 !important\

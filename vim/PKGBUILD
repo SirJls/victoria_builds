@@ -2,7 +2,8 @@
 
 pkgbase=vim
 pkgname=(vim vim-runtime)
-pkgver=7.4.944
+# pkgver=7.4.944
+pkgver=7.4.1639
 _versiondir=74
 pkgrel=1
 arch=(i686 x86_64)
@@ -11,7 +12,7 @@ url='http://www.vim.org'
 makedepends=( python2 python libxt mercurial)
 groups=('modified')
 source=(vim-$pkgver.tar.gz::http://github.com/vim/vim/archive/v$pkgver.tar.gz)
-sha1sums=('a670bd0a8417363d757341e1435474b42dd3ca75')
+sha1sums=('b116ce38e00b6d93e1f76bdcda52f93f3e8dee6c')
 
 prepare() {
     cd vim-$pkgver
@@ -43,7 +44,7 @@ build() {
         --with-x=yes \
         --enable-multibyte \
         --enable-rubyinterp \
-        --enable-python2interp \
+        --enable-pythoninterp \
         --enable-luainterp \
         --enable-perlinterp \
         --enable-cscope \
@@ -64,7 +65,7 @@ build() {
         --with-x=yes \
         --enable-multibyte \
         --enable-rubyinterp \
-        --enable-python2interp \
+        --enable-pythoninterp \
         --enable-luainterp \
         --enable-perlinterp \
         --enable-cscope \

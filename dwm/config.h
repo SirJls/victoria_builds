@@ -1,21 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]            = "Dejavu Sans Mono:medium:size=10";
-#define NUMCOLORS 9
-static const char colors[NUMCOLORS][ColLast][9] = {
-// border foreground background
-{ "#212121", "#696969", "#121212" }, // 0 = normal
-{ "#696969", "#E0E0E0", "#121212" }, // 1 = selected
-{ "#212121", "#CF4F88", "#121212" }, // 2 = red
-{ "#212121", "#53A6A6", "#121212" }, // 3 = green
-{ "#212121", "#914E89", "#121212" }, // 4 = yellow
-{ "#212121", "#4779B3", "#121212" }, // 5 = blue
-{ "#212121", "#47959E", "#121212" }, // 6 = cyan
-{ "#212121", "#7E62B3", "#121212" }, // 7 = magenta
-{ "#212121", "#899CA1", "#121212" }, // 8 = grey
+static const char font[]            = "Cousine:size=10";
+#define NUMCOLORS 7
+static const char colors[NUMCOLORS][ColLast][8] = {
+    // border    foreground background
+    { "#212121", "#202020", "#8090a0" }, /* 1 = selected */
+    { "#b23636", "#ffffff", "#8090a0" }, /* 2 = bar */
+    { "#212121", "#5b3674", "#8090a0" }, /* 3 = green */
+    { "#212121", "#b23636", "#8090a0" }, /* 4 = yellow */
+    { "#212121", "#b23636", "#8090a0" }, /* 5 = red */
+    { "#212121", "#5b3674", "#8090a0" }, /* 6 = magenta */
+    { "#212121", "#c0c0c0", "#8090a0" }, /* 7 = grey */
 };
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 8;        /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
 static const Bool topbar            = True;     /* False means bottom bar */
@@ -24,11 +22,11 @@ static const Bool topbar            = True;     /* False means bottom bar */
 static const char *tags[] = { "base", "web", "term", "mail", };
 
 static const Rule rules[] = {
-    /* class      instance    title       tags mask     isfloating   monitor */
-   { "Vimprobable", NULL,       NULL,       1 << 1,       False,       -1 },
-   { "Chromium",    NULL,       NULL,       1 << 0,       False,       -1 },
-   { "tabbed",      NULL,       NULL,       1 << 1,       False,       -1 },
-   { "mpv",         NULL,       NULL,       1 << 0,       True,        -1 },
+    /* class        instance    title       tags mask     isfloating   monitor */
+   { "Vimb",        NULL,       NULL,       1 << 1,       False,       -1 },
+   { "Tabbed",      NULL,       NULL,       1 << 1,       False,       -1 },
+   { "Skype",       NULL,       NULL,       1 << 0,       True,        -1 },
+   { "Mpv",         NULL,       NULL,       1 << 0,       True,        -1 },
    { "Gimp",        NULL,       NULL,       1 << 0,       True,        -1 },
    { "Pcmanfm",     NULL,       NULL,       1 << 0,       True,        -1 },
    {  NULL,         NULL,      "mutt",      1 << 3,       False,       -1 },
@@ -62,25 +60,27 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char  *dmenucmd[] = { "dmenu_run", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG], "-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
-static const char   *termcmd[] = { "urxvtc", NULL };
-static const char  *xtermcmd[] = { "xterm",  NULL };
-static const char   *passcmd[] = { "keepassx", NULL };
-static const char   *mailcmd[] = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
-static const char   *tmuxcmd[] = { "urxvtc", "-title", "tmux", "-e", "tmux", "-f", "/home/jls/.tmux/conf", NULL };
-static const char    *padcmd[] = { "urxvtc", "-title", "scratchpad", "-geometry", "56x10-30+40", NULL };
-static const char   *lockcmd[] = { "i3lock-fancy", NULL };
-static const char *rebootcmd[] = { "systemctl", "reboot", NULL };
-static const char   *shutcmd[] = { "systemctl", "poweroff", NULL };
+static const char *dmenucmd[]   = { "dmenu_run", "-i", "-p", "Run it:", "-fn", font, "-nb", colors[0][ColBG], "-nf", colors[0][ColFG],"-sb", colors[1][ColBG], "-sf", colors[1][ColFG], NULL };
+static const char *ncmpcppcmd[] = { "termite", "-e", "ncmpcpp", NULL };
+static const char *termcmd[]    = { "termite", NULL };
+static const char *xtermcmd[]   = { "xterm",  NULL };
+static const char *mailcmd[]    = { "termite", "--title", "mutt", "-e", "mutt", NULL };
+static const char *tmuxcmd[]    = { "termite", "--title", "tmux", "-e", "tmux", "-f", "/home/jls/.tmux/conf", NULL };
+static const char *padcmd[]     = { "termite", "--title", "scratchpad", "--geometry", "600x200-30+40", NULL };
+static const char *lockcmd[]    = { "i3lock-fancy", NULL };
+static const char *rebootcmd[]  = { "systemctl", "reboot", NULL };
+static const char *shutcmd[]    = { "systemctl", "poweroff", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { 0,                            XK_Menu,   spawn,          {.v = dmenucmd} },
+    { 0,                            XK_F12,    spawn,          {.v = dmenucmd} },
     { MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
     { ControlMask|Mod1Mask,         XK_m,      spawn,          {.v = mailcmd } },
     { ControlMask|Mod1Mask,         XK_x,      spawn,          {.v = xtermcmd } },
     { ControlMask|Mod1Mask,         XK_t,      spawn,          {.v = tmuxcmd } },
-    { ControlMask|Mod1Mask,         XK_c,      spawn,          {.v = passcmd } },
+    { ControlMask|Mod1Mask,         XK_n,      spawn,          {.v = ncmpcppcmd } },
+    { ControlMask|Mod1Mask,         XK_c,      spawn,          SHCMD("$HOME/scripts/dpass") },
     { ControlMask|Mod1Mask,         XK_l,      spawn,          {.v = lockcmd } },
     { ControlMask|Mod1Mask,         XK_p,      spawn,          {.v = padcmd } },
     { ControlMask|Mod1Mask,         XK_r,      spawn,          {.v = rebootcmd } },
