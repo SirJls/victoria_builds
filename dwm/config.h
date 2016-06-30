@@ -5,13 +5,13 @@ static const char font[]            = "Cousine:size=10";
 #define NUMCOLORS 7
 static const char colors[NUMCOLORS][ColLast][8] = {
     // border    foreground background
-    { "#212121", "#202020", "#8090a0" }, /* 1 = selected */
-    { "#b23636", "#ffffff", "#8090a0" }, /* 2 = bar */
-    { "#212121", "#5b3674", "#8090a0" }, /* 3 = green */
-    { "#212121", "#b23636", "#8090a0" }, /* 4 = yellow */
-    { "#212121", "#b23636", "#8090a0" }, /* 5 = red */
-    { "#212121", "#5b3674", "#8090a0" }, /* 6 = magenta */
-    { "#212121", "#c0c0c0", "#8090a0" }, /* 7 = grey */
+    { "#212121", "#202020", "#303030" }, /* 1 = selected */
+    { "#decc94", "#ffffff", "#303030" }, /* 2 = bar */
+    { "#212121", "#decc94", "#303030" }, /* 3 = green */
+    { "#212121", "#b23636", "#303030" }, /* 4 = yellow */
+    { "#212121", "#b23636", "#303030" }, /* 5 = red */
+    { "#212121", "#dec994", "#303030" }, /* 6 = magenta */
+    { "#212121", "#c0c0c0", "#303030" }, /* 7 = grey */
 };
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 8;        /* snap pixel */
