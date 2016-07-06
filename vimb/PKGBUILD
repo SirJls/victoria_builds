@@ -1,7 +1,7 @@
 # Maintainer: jason ryan <jasonwryan@gmail.com>
 pkgname=vimb-git
 _pkgname=vimb
-pkgver=2.11.r5.g822c2b5
+pkgver=2.11.r10.g2abb7d2
 pkgrel=1
 pkgdesc="Vimb is a lightweight WebKit-based browser"
 arch=('i686' 'x86_64')
@@ -10,9 +10,8 @@ license=('GPL3')
 depends=('webkitgtk2')
 provides=('vimb')
 conflicts=('vimb')
-source=('git+https://github.com/fanglingsu/vimb.git' 'vimb_jls.patch')
-md5sums=('SKIP'
-         '3bbefe2677a401c8c53ab42600fb7509')
+source=('git+https://github.com/fanglingsu/vimb.git')
+md5sums=('SKIP')
 
 pkgver() {
     cd "${_pkgname}"
@@ -21,7 +20,7 @@ pkgver() {
 
 prepare() {
     cd "${_pkgname}/src"
-    patch -p1 < "$srcdir"/vimb_jls.patch
+    # patch -p1 < "$srcdir"/vimb_jls.patch
 }
 
 build() {

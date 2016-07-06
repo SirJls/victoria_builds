@@ -2,9 +2,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"monospace:size=10"
+	"Cousine:size=10"
 };
-static const char dmenufont[]       = "monospace:size=10";
+static const char dmenufont[]       = "Cousine:size=10";
 
 #define NUMCOLORS 7
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
@@ -18,29 +18,30 @@ static const char colors[NUMCOLORS][MAXCOLORS][8] = {
     { "#212121", "#c0c0c0", "#303030" }, /* 7 = grey */
 };
 
-static const unsigned int borderpx  = 2;	/* border pixel of windows */
+static const unsigned int borderpx  = 1;	/* border pixel of windows */
 static const unsigned int snap      = 8;	/* snap pixel */
 static const unsigned int gappx     = 6;	/* gap pixel between windows */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "base", "web", "term", "mail", };
+static const char *tags[] = { "base", "web", "term", "mail", "media"};
 
 static const Rule rules[] = {
-	/* class        instance    title       tags mask     isfloating   monitor */
-	{ "Vimb",        NULL,       NULL,       1 << 1,       0,          -1 },
-	{ "Tabbed",      NULL,       NULL,       1 << 1,       0,          -1 },
-	{ "Skype",       NULL,       NULL,       1 << 0,       1,          -1 },
-	{ "Mpv",         NULL,       NULL,       1 << 0,       1,          -1 },
-	{ "Gimp",        NULL,       NULL,       1 << 0,       1,          -1 },
-	{ "Pcmanfm",     NULL,       NULL,       1 << 0,       1,          -1 },
-	{  NULL,         NULL,      "mutt",      1 << 3,       0,          -1 },
-	{  NULL,         NULL,      "tmux",      1 << 2,       0,          -1 },
-	{  NULL,         NULL,      "ssh",       1 << 0,       0,          -1 },
-	{  NULL,         NULL,      "scratchpad",     0,       1,          -1 },
+	/* class      instance    title       tags mask     isfloating   monitor */
+	{ "Gimp",     NULL,       NULL,       1 << 0,       1,           -1 },
+	{ "vimb",     NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "tabbed",   NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Skype",    NULL,       NULL,       1 << 0,       1,           -1 },
+	{ "mpv",      NULL,       NULL,       1 << 4,       1,           -1 },
+	{ "Pcmanfm",  NULL,       NULL,       1 << 0,       1,           -1 },
+	{ "Zathura",  NULL,       NULL,       1 << 0,       0,           -1 },
+	{  NULL,      NULL,      "mutt",      1 << 3,       0,           -1 },
+	{  NULL,      NULL,      "tmux",      1 << 2,       0,           -1 },
+	{  NULL,      NULL,      "ncmpcpp",   1 << 4,       0,           -1 },
+	{  NULL,      NULL,      "ssh",       1 << 0,       0,           -1 },
+	{  NULL,      NULL,      "scratchpad",     0,       1,           -1 },
 };
-
 
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
@@ -69,12 +70,12 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
 static const char *dmenucmd[]   = { "dmenu_run", "-i", "-p", "Run it:", "-fn", dmenufont, "-nb", "#303030", "-nf", "#ffffff", "-sb", "#303030", "-sf", "#decc94", NULL };
-static const char *ncmpcppcmd[] = { "termite", "-e", "ncmpcpp", NULL };
-static const char *termcmd[]    = { "termite", NULL };
+static const char *ncmpcppcmd[] = { "urxvtc", "-title", "ncmpcpp", "-e", "ncmpcpp", NULL };
+static const char *termcmd[]    = { "urxvtc", NULL };
 static const char *xtermcmd[]   = { "xterm",  NULL };
-static const char *mailcmd[]    = { "termite", "--title", "mutt", "-e", "mutt", NULL };
-static const char *tmuxcmd[]    = { "termite", "--title", "tmux", "-e", "tmux", "-f", "/home/jls/.tmux/conf", NULL };
-static const char *padcmd[]     = { "termite", "--title", "scratchpad", "--geometry", "600x200-30+40", NULL };
+static const char *mailcmd[]    = { "urxvtc", "-title", "mutt", "-e", "mutt", NULL };
+static const char *tmuxcmd[]    = { "urxvtc", "-title", "tmux", "-e", "tmux", "-f", "/home/enigma/.tmux/conf", NULL };
+static const char *padcmd[]     = { "urxvtc", "-title", "scratchpad", "-geometry", "56x10-30+40", NULL };
 static const char *lockcmd[]    = { "i3lock-fancy", NULL };
 static const char *rebootcmd[]  = { "systemctl", "reboot", NULL };
 static const char *shutcmd[]    = { "systemctl", "poweroff", NULL };
@@ -143,6 +144,7 @@ static Button buttons[] = {
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
+	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
