@@ -9,13 +9,13 @@ static const char dmenufont[]       = "Cousine:size=10";
 #define NUMCOLORS 7
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
     // border    foreground background
-    { "#212121", "#ffffff", "#303030" }, /* 1 = selected */
-    { "#decc94", "#decc94", "#303030" }, /* 2 = bar */
-    { "#212121", "#decc94", "#303030" }, /* 3 = green */
-    { "#212121", "#d75f5f", "#303030" }, /* 4 = yellow */
-    { "#212121", "#d75f5f", "#303030" }, /* 5 = red */
-    { "#212121", "#dec994", "#303030" }, /* 6 = magenta */
-    { "#212121", "#c0c0c0", "#303030" }, /* 7 = grey */
+    { "#F5F5F5", "#444444", "#F5F5F5" }, /* 1 = selected */
+    { "#d7005f", "#d7005f", "#F5F5F5" }, /* 2 = bar */
+    { "#F5F5F5", "#d7005f", "#F5F5F5" },
+    { "#F5F5F5", "#d7005f", "#F5F5F5" },
+    { "#F5F5F5", "#d7005f", "#F5F5F5" },
+    { "#F5F5F5", "#d7005f", "#F5F5F5" },
+    { "#F5F5F5", "#d7005f", "#F5F5F5" },
 };
 
 static const unsigned int borderpx  = 1;	/* border pixel of windows */
@@ -69,7 +69,7 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 
-static const char *dmenucmd[]   = { "dmenu_run", "-i", "-p", "Run it:", "-fn", dmenufont, "-nb", "#303030", "-nf", "#ffffff", "-sb", "#303030", "-sf", "#decc94", NULL };
+static const char *dmenucmd[]   = { "dmenu_run", "-i", "-p", "Run it:", "-fn", dmenufont, "-nb", "#F5F5F5", "-nf", "#444444", "-sb", "#F5F5F5", "-sf", "#d7005f", NULL };
 static const char *ncmpcppcmd[] = { "urxvtc", "-title", "ncmpcpp", "-e", "ncmpcpp", NULL };
 static const char *termcmd[]    = { "urxvtc", NULL };
 static const char *xtermcmd[]   = { "xterm",  NULL };

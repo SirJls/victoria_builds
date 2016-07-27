@@ -9,7 +9,7 @@ depends=('libx11')
 source=("http://dl.suckless.org/tools/${pkgname}-${pkgver}.tar.gz"
         'config.h')
 md5sums=('7898992feb9358e0196119750b77b42c'
-         '562b04cfaa5545de217a0220e1f19999')
+         '35f9483bae833ef4b1c19e7522aa61f7')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
