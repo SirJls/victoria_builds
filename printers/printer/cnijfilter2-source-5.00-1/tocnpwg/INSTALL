@@ -1,6 +1,0 @@
-To build and install tocnpwg:
-
-  Building "tocnpwg".
-        ./autogen.sh
-        make
-        make install

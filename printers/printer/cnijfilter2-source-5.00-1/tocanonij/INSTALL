@@ -1,6 +1,0 @@
-To build and install tocanonij:
-
-  Building "tocanonij".
-        ./autogen.sh
-        make
-        make install
