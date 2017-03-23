@@ -1,0 +1,96 @@
+# Just plain vim
+pkgbase=vim
+pkgname=(vim vim-runtime)
+pkgver=8.0.0329
+pkgrel=1
+arch=(i686 x86_64)
+license=('custom:vim')
+url='http://www.vim.org'
+makedepends=( python2 python libxt mercurial)
+groups=('custom')
+source=(vim-$pkgver.tar.gz::http://github.com/vim/vim/archive/v$pkgver.tar.gz)
+sha1sums=('162d2876a612da32ce099e05d2f05a201043617a')
+
+prepare() {
+  cd vim-$pkgver/src
+
+  # define the place for the global (g)vimrc file (set to /etc/vimrc)
+  sed -i 's|^.*\(#define SYS_.*VIMRC_FILE.*"\) .*$|\1|' feature.h
+  sed -i 's|^.*\(#define VIMRC_FILE.*"\) .*$|\1|' feature.h
+
+  autoconf
+}
+
+build() {
+  cd "${srcdir}"/"${pkgname}-${pkgver}"
+
+  ./configure \
+    --prefix=/usr \
+    --localstatedir=/var/lib/vim \
+    --with-features=huge \
+    --with-compiledby=Arch:sjors \
+    --with-x=yes \
+    --enable-multibyte \
+    --enable-rubyinterp \
+    --enable-pythoninterp=dynamic \
+    --enable-python3interp=dynamic \
+    --disable-gui \
+    --disable-signs \
+    --disable-netbeans
+
+  make
+}
+
+package_vim() {
+  pkgdesc='Vi Improved, a highly configurable, improved version of the vi text editor (with support for additional scripting languages)'
+  depends=("vim-runtime=${pkgver}-${pkgrel}" 'gpm')
+
+  cd "${srcdir}"/"${pkgname}-${pkgver}"
+  make -j1 VIMRCLOC=/etc DESTDIR="${pkgdir}" install
+
+  # provided by (n)vi in core
+  rm "${pkgdir}"/usr/bin/{ex,view}
+
+  # delete some manpages
+  find "${pkgdir}"/usr/share/man -type d -name 'man1' 2>/dev/null | \
+    while read _mandir; do
+    cd ${_mandir}
+    rm -f ex.1 view.1 # provided by (n)vi
+    rm -f evim.1    # this does not make sense if we have no GUI
+  done
+
+  # Runtime provided by runtime package
+  rm -r "${pkgdir}"/usr/share/vim
+
+  # license
+  install -Dm644 runtime/doc/uganda.txt \
+    "${pkgdir}"/usr/share/licenses/${pkgname}/license.txt
+}
+
+package_vim-runtime() {
+  pkgdesc='Runtime for vim and gvim'
+  depends=('perl' 'gawk')
+  backup=('etc/vimrc')
+
+  cd "${srcdir}"/vim-"${pkgver}"
+
+  make -j1 VIMRCLOC=/etc DESTDIR="${pkgdir}" install
+  # man and bin files belong to 'vim'
+  rm -r "${pkgdir}"/usr/share/man/ "${pkgdir}"/usr/bin/
+
+  # Don't forget logtalk.dict
+  install -Dm644 runtime/ftplugin/logtalk.dict \
+    "${pkgdir}"/usr/share/vim/vim${_versiondir}/ftplugin/logtalk.dict
+
+  # rgb.txt file
+  install -Dm644 runtime/rgb.txt \
+    "${pkgdir}"/usr/share/vim/vim${_versiondir}/rgb.txt
+
+  # no desktop files and icons
+  rm -r "${pkgdir}"/usr/share/{applications,icons}
+
+  # license
+  install -dm755 "${pkgdir}"/usr/share/licenses/vim-runtime
+  ln -s /usr/share/vim/vim${_versiondir}/doc/uganda.txt \
+    "${pkgdir}"/usr/share/licenses/vim-runtime/license.txt
+}

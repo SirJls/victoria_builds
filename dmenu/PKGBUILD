@@ -1,31 +1,30 @@
-# Patched for xft and file completion support
 pkgname=dmenu
-pkgver=4.5.13.5ed5e90
+pkgver=4.6.18.g5cd66e2
 pkgrel=1
 pkgdesc="A generic menu for X"
 url="http://tools.suckless.org/dmenu/"
 arch=('i686' 'x86_64')
-groups=('modified')
 license=('MIT')
 depends=('sh' 'libxinerama' 'libxft')
 makedepends=('git')
-source=(git://git.suckless.org/dmenu#commit=5ed5e90bf
-        xft_file_completion.patch)
-md5sums=('SKIP'
-         'fcb8646b80e09547150aa3a51bcc62a6')
+provides=($pkgname)
+conflicts=($pkgname)
+groups=('custom')
+source=(git://git.suckless.org/$pkgname)
+sha256sums=('SKIP')
 
 pkgver() {
   cd $pkgname
-  echo 4.5.$(git rev-list 7f45b3f7a..@ --count).$(git rev-parse --short HEAD)
+  git describe --tags --long | sed 's/-/./g'
 }
 
-prepare(){
+prepare() {
   cd $pkgname
-  patch -p1 < ../xft_file_completion.patch
-  sed -i 's:-I/usr/local/include/freetype2:-I/usr/include/freetype2:' config.mk
-} 
+  # search for our config
+  [[ -f ${SRCDEST}/config.h ]] && cp "${SRCDEST}/config.h" .
+}
 
-build(){
+build() {
   cd $pkgname
   make \
     X11INC=/usr/include/X11 \

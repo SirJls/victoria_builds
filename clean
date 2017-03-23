@@ -1,13 +1,19 @@
-#!/bin/sh
+#! /bin/sh
+# ----------------------------------------------------
+# file:   $HOME/builds/clean
+# author: jls - http://sjorssparreboom.nl
+# ----------------------------------------------------
 
-find . -name "*.pkg.*" -type f -delete -print0
-find . -name "*.pkg.*" -type f -delete -print0
-find . -name "*.tar.*" -type f -delete -print0
-find . -name "*.tar" -type f -delete -print0
+find . -name "*src*" -type d -exec rm -rf {} \;
+find . -name "*pkg*" -type d -exec rm -rf {} \;
+find . -name "*tar*" -type f -delete -print0
 find . -name "*.o" -type f -delete -print0
-find . -name "*.bak" -type f -delete -print0
-find . -name "cookie" -type f -delete -print0
+find . -name "*.c" -type f -delete -print0
 
-find . -name "src" -type d -exec rm -rf {} \;
-find . -name "pkg" -type d -exec rm -rf {} \;
+maps=($(find $PWD -maxdepth 1 -name "*" -type d | sed 's/.*\///g'))
 
+skip_first=1
+for elem in "${maps[@]}"; do
+  (( skip_first != 1 )) && rm -rf "${PWD}/${elem}/${elem}"
+  (( skip_first++ ))
+done
