@@ -1,5 +1,5 @@
 pkgname=st
-pkgver=0.7.17.gc63a87c
+pkgver=0.7.20.ge7ed326
 pkgrel=1
 pkgdesc="A simple terminal implementation for X."
 url="http://st.suckless.org/"

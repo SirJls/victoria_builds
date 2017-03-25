@@ -32,8 +32,8 @@ build() {
     --with-x=yes \
     --enable-multibyte \
     --enable-rubyinterp \
-    --enable-pythoninterp=dynamic \
-    --enable-python3interp=dynamic \
+    --enable-pythoninterp \
+    --enable-python3interp \
     --disable-gui \
     --disable-signs \
     --disable-netbeans
