@@ -9,7 +9,7 @@ pkgdesc='An improved dynamic tiling window manager for Xorg'
 arch=('i686' 'x86_64')
 url='http://i3wm.org/'
 replaces=('i3' 'i3bar')
-groups=('i3')
+groups=('custom')
 depends=(
 'xcb-util-cursor'
 'xcb-util-keysyms'
@@ -21,10 +21,9 @@ depends=(
 'pango'
 'libxkbcommon-x11'
 )
-makedepends=( 'bison' 'flex')
+makedepends=( 'bison' 'flex' 'i3status')
 optdepends=(
 'i3lock: The i3 lock screen.'
-'i3status: The bar for displaying system information.'
 'dmenu: Menu launcher for X.'
 'perl'
 'perl-json-xs'
@@ -33,11 +32,12 @@ optdepends=(
 options=('docs' '!strip')
 source=("http://i3wm.org/downloads/${pkgname}-${pkgver}.tar.bz2"
 "http://i3wm.org/downloads/${pkgname}-${pkgver}.tar.bz2.asc")
-md5sums=('08d17dcf1fde665a15f7d411486546ae' 'SKIP')
+md5sums=('08d17dcf1fde665a15f7d411486546ae'
+         'SKIP')
 validpgpkeys=('424E14D703E7C6D43D9D6F364E7160ED4AC8EE1D')
 
 build() {
-  cd "$srcdir/$_pkgsourcename-$pkgver"
+  cd "${srcdir}/${pkgname}-${pkgver}"
 
   ./configure --prefix=/usr --sysconfdir=/etc
   cd ${CARCH}-pc-linux-gnu
@@ -46,8 +46,8 @@ build() {
 }
 
 package() {
-  cd "$srcdir/$_pkgsourcename-$pkgver/${CARCH}-pc-linux-gnu"
-  make DESTDIR="$pkgdir/" install
+  cd "${srcdir}/${pkgname}-${pkgver}/${CARCH}-pc-linux-gnu"
+  make DESTDIR="${pkgdir}/" install
 
   mkdir -p "${pkgdir}/usr/share/man/man1/"
   install -m644 ../man/*.1 "${pkgdir}/usr/share/man/man1/"
