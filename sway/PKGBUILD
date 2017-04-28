@@ -2,7 +2,7 @@
 # Contributor: Drew DeVault <sir@cmpwn.com>
 
 pkgname=sway
-pkgver=0.12.rc1.50.g8d9a928
+pkgver=0.13.rc1.7.gaca0710
 pkgrel=1
 license=('MIT')
 pkgdesc='i3 compatible window manager for Wayland'
