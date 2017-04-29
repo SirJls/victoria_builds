@@ -1,5 +1,4 @@
 # Maintainer: Sjors Sparreboom <mail@sjorssparreboom.nl>
-# Contributor: Drew DeVault <sir@cmpwn.com>
 
 pkgname=sway
 pkgver=0.13.rc1.7.gaca0710

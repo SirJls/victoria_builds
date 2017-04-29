@@ -1,0 +1,36 @@
+# Maintainer: SirJls (Sjors Sparreboom) <mail@sjorssparreboom.nl>
+
+pkgname=newsbeuter
+pkgver=ba108e6
+pkgrel=1
+pkgdesc='The mutt of feed readers.'
+url='http://www.newsbeuter.org'
+arch=('i686' 'x86_64')
+license=('MIT')
+depends=('sqlite3' 'curl' 'libxml2' 'stfl' 'json-c')
+optdepends=('ruby')
+makedepends=('git' 'swig' 'asciidoc' 'docbook-xsl' 'pkgconfig')
+options=('docs' '!libtool')
+conflicts=('newsbeuter')
+source=('git://github.com/akrennmair/newsbeuter.git')
+md5sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+  git describe --tags --long --always | sed 's/-/./g'
+}
+
+build() {
+  cd $pkgname
+  ./config.sh
+  make
+  make doc
+}
+
+package() {
+  cd $pkgname
+
+  make prefix=/usr "DESTDIR=${pkgdir}" install
+  install -Dm644 LICENSE \
+    "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

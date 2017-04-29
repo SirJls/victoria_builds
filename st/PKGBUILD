@@ -1,3 +1,5 @@
+# Maintainer: Sjors Sparreboom <mail@sjorssparreboom.nl>
+
 pkgname=st
 pkgver=0.7.20.ge7ed326
 pkgrel=1

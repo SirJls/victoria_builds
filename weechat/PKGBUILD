@@ -1,0 +1,41 @@
+# Maintainer: Sjors Sparreboom <mail@sjorssparreboom.nl>
+
+pkgname=weechat
+pkgver=v1.7.188.ga9f6c34fa
+pkgrel=1
+pkgdesc="Wee Enhanced Environment for Chat"
+arch=('i686' 'x86_64')
+url="http://weechat.org"
+license=('GPLv3')
+groups=('custom')
+depends=('libgcrypt' 'curl')
+makedepends=('git' 'cmake' 'pkgconfig' 'perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell')
+optdepends=('perl' 'python2' 'lua' 'tcl' 'ruby' 'aspell' 'guile')
+provides=('weechat')
+conflicts=('weechat')
+source=("$pkgname::git://github.com/weechat/weechat.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+  git describe --tags --long | sed 's/-/./g'
+}
+
+build() {
+  cd $pkgname
+
+  cmake -DCMAKE_INSTALL_PREFIX=/usr           \
+    -DCMAKE_BUILD_TYPE=Release                \
+    -DCMAKE_ENABLE_ENCHANT=ON                 \
+    -DCMAKE_ENABLE_MAN=ON                     \
+    -DCMAKE_ENABLE_DOC=ON                     \
+    -DPYTHON_EXECUTABLE=/usr/bin/python2      \
+    -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so
+  make
+}
+
+
+package() {
+  cd $pkgname
+  make DESTDIR="$pkgdir/" install
+}

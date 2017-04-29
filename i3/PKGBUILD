@@ -1,5 +1,4 @@
-# Maintainer: Sjors Sparreboom <mail@sjorssparreboom.nl>
-# Contributor: i3 Team
+# Maintainer: SirJls (Sjors Sparreboom) <mail@sjorssparreboom.nl>
 
 pkgname=i3
 pkgver=4.13
@@ -55,4 +54,3 @@ package() {
   install -Dm644 ../LICENSE \
     ${pkgdir}/usr/share/licenses/${pkgname}/LICENSE
 }
-

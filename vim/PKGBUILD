@@ -1,4 +1,5 @@
-# Just plain vim
+# Maintainer: Sjors Sparreboom <mail@sjorssparreboom.nl>
+
 pkgbase=vim
 pkgname=(vim vim-runtime)
 pkgver=8.0.0329
