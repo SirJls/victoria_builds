@@ -1,7 +1,7 @@
 #! /bin/sh
 # ----------------------------------------------------
 # file:   $HOME/builds/clean
-# author: jls - http://sjorssparreboom.nl
+# author: SirJls - http://sjorssparreboom.nl
 # ----------------------------------------------------
 
 find . -name "*src*" -type d -exec rm -rf {} \;

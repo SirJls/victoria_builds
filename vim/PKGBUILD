@@ -1,4 +1,4 @@
-# Maintainer: Sjors Sparreboom <mail@sjorssparreboom.nl>
+# Maintainer:  Joris Leendert Sparreboom <mail@sjorssparreboom.nl>
 
 pkgbase=vim
 pkgname=(vim vim-runtime)

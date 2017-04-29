@@ -1,4 +1,4 @@
-# Maintainer: SirJls (Sjors Sparreboom) <mail@sjorssparreboom.nl>
+# Maintainer: SirJls ( Joris Leendert Sparreboom) <mail@sjorssparreboom.nl>
 
 pkgname=dmenu
 pkgver=4.6.18.g5cd66e2
