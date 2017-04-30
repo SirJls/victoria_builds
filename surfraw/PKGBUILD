@@ -1,0 +1,38 @@
+# Maintainer: SirJls <mail@sjorssparreboom.nl>
+
+pkgname=surfraw
+pkgver=surfraw.2.2.9.14.g9417139
+pkgrel=1
+pkgdesc="Surfraw - Shell Users' Revolutionary Front Rage Against the Web"
+arch=('i686' 'x86_64')
+url="http://surfraw.alioth.debian.org/"
+license=('custom')
+groups=('custom')
+depends=('perl')
+makedepends=('git')
+provides=('surfraw')
+conflicts=('surfraw')
+backup=('etc/xdg/surfraw/conf' 'etc/xdg/surfraw/bookmarks')
+source=("$pkgname::git://anonscm.debian.org/"${pkgname}"/"${pkgname}".git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "$pkgname"
+  git describe --tags --long --always | sed 's/-/./g'
+}
+
+build() {
+  cd "$pkgname"
+  ./prebuild
+  ./configure --prefix=/usr --sysconfdir=/etc --disable-opensearch
+  make
+}
+
+package() {
+  cd "$pkgname"
+  make DESTDIR="$pkgdir/" install
+  # license
+  install -D -m644 COPYING "${pkgdir}/usr/share/licenses/${gitname}/COPYING"
+}
+
+# vim:set et sw=2 ts=2 tw=79:
