@@ -1,0 +1,46 @@
+# Maintainer:  SirJls <mail@sjorssparreboom.nl>
+
+pkgname=offlineimap
+pkgver=v7.1.0.13.g22a163a
+pkgrel=1
+pkgdesc="Read/sync your IMAP mailboxes"
+arch=('i686' 'x86_64')
+url="http://www.offlineimap.org"
+license=('GPL')
+groups=('custom')
+depends=('python2' 'python2-six')
+makedepends=('git' 'asciidoc')
+provides=('offlineimap')
+conflicts=('offlineimap')
+source=('git://github.com/OfflineIMAP/offlineimap.git#branch=next')
+md5sums=('SKIP')
+
+pkgver() {
+  cd $pkgname
+  git describe --tags --long --always | sed 's/-/./g'
+}
+
+build() {
+  cd $pkgname
+  python2 setup.py build
+
+  cd "${srcdir}/${pkgname}/docs"
+  make man
+}
+
+package() {
+  cd $pkgname
+  python2 setup.py install --root="$pkgdir/" --optimize=1
+
+  install -D -m644 docs/offlineimap.1 ${pkgdir}/usr/share/man/man1/offlineimap.1
+  install -D -m644 docs/offlineimapui.7 "${pkgdir}"/usr/share/man/man7/offlineimapui.7
+  install -D -m644 offlineimap.conf ${pkgdir}/usr/share/offlineimap/offlineimap.conf
+  install -D -m644 offlineimap.conf.minimal ${pkgdir}/usr/share/offlineimap/offlineimap.conf.minimal
+
+  #systemd files
+  install -Dm644 contrib/systemd/mail.target "${pkgdir}"/usr/lib/systemd/user/mail.target
+  install -Dm644 contrib/systemd/$pkgname.service "${pkgdir}"/usr/lib/systemd/user/$pkgname.service
+  install -Dm644 contrib/systemd/$pkgname.timer "${pkgdir}"/usr/lib/systemd/user/_$pkgname.timer
+  install -Dm644 contrib/systemd/$pkgname@.service "${pkgdir}"/usr/lib/systemd/user/$pkgname@.service
+  install -Dm644 contrib/systemd/$pkgname@.timer "${pkgdir}"/usr/lib/systemd/user/$pkgname@.timer
+}

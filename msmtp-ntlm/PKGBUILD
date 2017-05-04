@@ -1,0 +1,34 @@
+# Maintainer: SirJls <mail@sjorssparreboom.nl>
+
+pkgname=msmtp-ntlm
+_pkgname=msmtp
+pkgver=1.6.6
+pkgrel=1
+pkgdesc="SMTP client with a sendmail compatible interface"
+url="http://msmtp.sourceforge.net"
+arch=('i686' 'x86_64')
+license=('GPL3')
+makedepends=('texlive-plainextra' 'gsasl-ntlm' 'libsecret')
+provides=('msmtp')
+conflicts=('msmtp')
+source=(http://download.sourceforge.net/sourceforge/${_pkgname}/${_pkgname}-${pkgver}.tar.xz)
+md5sums=('82b0520b57db4b2cf05333d11fb5974d')
+
+build() {
+  cd ${_pkgname}-${pkgver}
+  ./configure --prefix=/usr --sysconfdir=/etc --with-ssl=gnutls --with-libgsasl
+  make
+  make -C doc html pdf
+}
+
+package() {
+  cd ${_pkgname}-${pkgver}
+  make DESTDIR="${pkgdir}" install 
+  make DESTDIR="${pkgdir}" -C doc install-html install-pdf
+
+  install -d "${pkgdir}/usr/share/doc/msmtp"
+  cp -r scripts/{find_alias,msmtpqueue,msmtpq,set_sendmail} "${pkgdir}/usr/share/doc/msmtp/"
+  install -D -m644 doc/*.example "${pkgdir}/usr/share/doc/msmtp/"
+
+  install -D -m644 scripts/vim/msmtp.vim "${pkgdir}/usr/share/vim/vimfiles/syntax/msmtp.vim"
+}
