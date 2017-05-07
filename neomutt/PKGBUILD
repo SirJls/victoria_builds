@@ -1,7 +1,7 @@
 # Maintainer: SirJls <mail@sjorssparreboom.nl>
 
 pkgname=neomutt
-pkgver=neomutt.20170428.21.gc02eae81
+pkgver=neomutt.20170428.45.g01e90883
 pkgrel=1
 pkgdesc='The New Mutt: powerful text-based mail client with all the best feature patches'
 url='http://www.neomutt.org/'
@@ -27,18 +27,11 @@ build() {
   ./prepare \
     --prefix=/usr \
     --sysconfdir=/etc \
-    --enable-debug \
     --enable-pgp \
     --enable-gpgme \
     --enable-notmuch \
-    --enable-pop \
-    --enable-imap \
-    --enable-smtp \
     --enable-sidebar \
     --enable-compressed \
-    --with-gss=/usr \
-    --with-ssl=/usr \
-    --with-sasl \
     --with-curses=/usr \
     --with-regex \
     --with-idn \
