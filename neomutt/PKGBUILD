@@ -1,7 +1,7 @@
 # Maintainer: SirJls <mail@sjorssparreboom.nl>
 
 pkgname=neomutt
-pkgver=neomutt.20170428.45.g01e90883
+pkgver=neomutt.20171215.136.g032aca80
 pkgrel=1
 pkgdesc='The New Mutt: powerful text-based mail client with all the best feature patches'
 url='http://www.neomutt.org/'
@@ -11,6 +11,7 @@ arch=('i686' 'x86_64')
 depends=('openssl' 'gdbm' 'mime-types' 'libsasl' 'gnupg' 'gpgme' 'libidn' 'krb5' 'notmuch-runtime')
 optdepends=('urlview: for url menu')
 makedepends=('git' 'gnupg' 'libxslt')
+groups=('custom')
 conflicts=('mutt')
 provides=('mutt')
 md5sums=('SKIP')
@@ -24,21 +25,25 @@ build() {
   cd "$pkgname"
 
   # Configure the build.
-  ./prepare \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --enable-pgp \
-    --enable-gpgme \
-    --enable-notmuch \
-    --enable-sidebar \
-    --enable-compressed \
-    --with-curses=/usr \
-    --with-regex \
-    --with-idn \
-    --with-gdbm
-
-  # Build it!
-  make
+  ./configure           \
+    --prefix=/usr       \
+    --sysconfdir=/etc   \
+    --with-notmuch=/usr \
+    --notmuch           \
+    --with-gpgme=/usr   \
+    --gpgme             \
+    --with-gss=/usr     \
+    --gss               \
+    --with-ssl=/usr     \
+    --ssl               \
+    --with-sasl=/usr    \
+    --sasl              \
+    --with-gdbm=/usr    \
+    --gdbm              \
+    --with-idn=/usr     \
+    --disable-doc       \
+    --enable-pgp
+    make
 }
 
 package() {
@@ -46,9 +51,6 @@ package() {
 
   # Install the program.
   make DESTDIR="${pkgdir}" install
-
-  # Cruft we don't want.
-  rm "${pkgdir}"/etc/mime.types{,.dist}
 }
 
 # vim:set et sw=2 ts=2 tw=79:

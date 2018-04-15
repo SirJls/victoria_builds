@@ -1,7 +1,7 @@
 # Maintainer:  SirJls <mail@sjorssparreboom.nl>
 
 pkgname=offlineimap
-pkgver=v7.1.0.13.g22a163a
+pkgver=v7.1.5.1.gf732d6b
 pkgrel=1
 pkgdesc="Read/sync your IMAP mailboxes"
 arch=('i686' 'x86_64')

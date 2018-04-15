@@ -1,7 +1,7 @@
 # Maintainer: SirJls (Joris Leendert Sparreboom) <mail@sjorssparreboom.nl>
 
 pkgname=weechat
-pkgver=v1.7.188.ga9f6c34fa
+pkgver=v2.0.112.ga86df82ae
 pkgrel=1
 pkgdesc="Wee Enhanced Environment for Chat"
 arch=('i686' 'x86_64')

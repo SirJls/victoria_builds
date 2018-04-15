@@ -1,7 +1,7 @@
 # Maintainer: SirJls ( Joris Leendert Sparreboom) <mail@sjorssparreboom.nl>
 
 pkgname=newsbeuter
-pkgver=ba108e6
+pkgver=7c981f4
 pkgrel=1
 pkgdesc='The mutt of feed readers.'
 url='http://www.newsbeuter.org'
